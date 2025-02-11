@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="category-list">
+    <view class="empty-state" wx:if="{{!categories.length}}">
+      <text>暂无分类</text>
+      <button class="add-btn" bindtap="navigateToAdd">添加分类</button>
+    </view>
+    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+      <image class="category-icon" src="{{item.icon}}"></image>
+      <view class="category-info">
+        <text class="category-name">{{item.name}}</text>
+        <text class="category-count">{{item.itemCount}}个物品</text>
+      </view>
+      <view class="category-arrow">
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+  <view class="floating-button" bindtap="navigateToAdd">
+    <text>+</text>
+  </view>
+</view>

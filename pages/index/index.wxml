@@ -1,0 +1,33 @@
+<view class="container" style="height: -214rpx; display: block; box-sizing: border-box">
+  <view class="header">
+    <text class="title">物纪资产</text>
+  </view>
+  <view class="summary">
+    <view class="summary-item">
+      <text class="label">总资产</text>
+      <text class="value">¥0.00</text>
+    </view>
+    <view class="summary-item">
+      <text class="label">每日成本</text>
+      <text class="value">¥0.00</text>
+    </view>
+  </view>
+  <view class="asset-list">
+    <view class="section-title">最近添加</view>
+    <view class="empty-state" wx:if="{{!assets.length}}">
+      <text>暂无资产记录</text>
+      <button class="add-btn" bindtap="navigateToAdd">添加资产</button>
+    </view>
+    <view class="asset-item" wx:for="{{assets}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+      <image class="asset-icon" src="{{item.icon}}"></image>
+      <view class="asset-info">
+        <text class="asset-name">{{item.name}}</text>
+        <text class="asset-category">{{item.category}}</text>
+      </view>
+      <view class="asset-price">
+        <text class="price">¥{{item.price}}</text>
+        <text class="daily">¥{{item.dailyPrice}}/天</text>
+      </view>
+    </view>
+  </view>
+</view>

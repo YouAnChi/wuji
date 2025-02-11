@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// 初始化数据库连接
-	dsn := "root:password@tcp(127.0.0.1:3306)/wuji?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:12345678@tcp(127.0.0.1:3306)/wuji?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("数据库连接失败: %v", err)
