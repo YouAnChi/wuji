@@ -1,4 +1,4 @@
-module wuji
+module wuji/server
 
 go 1.21
 

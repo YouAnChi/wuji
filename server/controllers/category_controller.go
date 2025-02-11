@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"net/http"
-	"wuji/models"
+	"wuji/server/models"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -71,6 +71,25 @@ func (cc *CategoryController) UpdateCategory(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	c.JSON(http.StatusOK, category)
+}
+
+// GetCategory 获取单个分类详情
+func (cc *CategoryController) GetCategory(c *gin.Context) {
+	categoryID := c.Param("id")
+	userID := c.GetUint("user_id")
+	var category models.Category
+
+	if err := cc.DB.Where("id = ? AND user_id = ?", categoryID, userID).First(&category).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "分类不存在"})
+		return
+	}
+
+	// 获取该分类下的物品数量
+	var count int64
+	cc.DB.Model(&models.Asset{}).Where("user_id = ? AND category = ?", userID, category.Name).Count(&count)
+	category.ItemCount = int(count)
 
 	c.JSON(http.StatusOK, category)
 }

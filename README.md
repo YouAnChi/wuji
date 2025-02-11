@@ -13,6 +13,55 @@
 - Go语言
 - RESTful API设计
 
+## 前后端通信
+
+### 通信方式
+前端通过微信小程序提供的 `wx.request()` 方法与后端服务器进行通信。所有请求都发送到后端服务器的 8080 端口。
+
+### 接口认证
+所有需要认证的接口都通过 HTTP Header 中的 Authorization 字段传递 token：
+```javascript
+header: {
+  'Authorization': wx.getStorageSync('token')
+}
+```
+
+### 主要API接口
+
+1. 用户认证
+```
+POST /api/auth/login
+请求体：{ code: string }
+响应：{ token: string }
+```
+
+2. 获取用户信息
+```
+GET /api/user/profile
+响应：用户信息对象
+```
+
+3. 资产管理
+```
+GET /api/assets            // 获取资产列表
+GET /api/assets/:id        // 获取资产详情
+POST /api/assets           // 创建新资产
+```
+
+4. 分类管理
+```
+GET /api/categories        // 获取分类列表
+```
+
+### 错误处理
+前端统一通过 `wx.showToast()` 展示错误信息：
+```javascript
+wx.showToast({
+  title: '加载失败',
+  icon: 'error'
+});
+```
+
 ## 功能模块
 
 ### 1. 首页
@@ -92,6 +141,12 @@ go run main.go
 ```
 
 4. 使用微信开发者工具打开项目目录
+
+5. 配置域名
+- 登录微信小程序管理后台
+- 进入「开发」-「开发设置」
+- 在「服务器域名」中添加以下域名到request合法域名列表：
+  - https://tcb-api.tencentcloudapi.com
 
 ## 部署说明
 

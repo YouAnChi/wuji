@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"wuji/models"
+	"wuji/server/models"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -44,6 +44,20 @@ func (ac *AssetController) GetAssets(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, assets)
+}
+
+// GetAsset 获取单个资产详情
+func (ac *AssetController) GetAsset(c *gin.Context) {
+	userID := c.GetUint("user_id")
+	assetID := c.Param("id")
+	var asset models.Asset
+
+	if err := ac.DB.Where("id = ? AND user_id = ?", assetID, userID).Preload("ExtraCosts").First(&asset).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "资产不存在"})
+		return
+	}
+
+	c.JSON(http.StatusOK, asset)
 }
 
 // UpdateAsset 更新资产信息

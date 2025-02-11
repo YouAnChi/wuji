@@ -21,25 +21,25 @@
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home-active.png"
+        "selectedIconPath": "assets/icons/home.png"
       },
       {
         "pagePath": "pages/category/list",
         "text": "分类",
         "iconPath": "assets/icons/category.png",
-        "selectedIconPath": "assets/icons/category-active.png"
+        "selectedIconPath": "assets/icons/category.png"
       },
       {
         "pagePath": "pages/asset/list",
         "text": "资产",
         "iconPath": "assets/icons/asset.png",
-        "selectedIconPath": "assets/icons/asset-active.png"
+        "selectedIconPath": "assets/icons/asset.png"
       },
       {
         "pagePath": "pages/user/profile",
         "text": "我的",
         "iconPath": "assets/icons/user.png",
-        "selectedIconPath": "assets/icons/user-active.png"
+        "selectedIconPath": "assets/icons/user.png"
       }
     ]
   },
